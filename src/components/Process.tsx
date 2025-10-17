@@ -1,46 +1,49 @@
 import { MessageSquare, Wrench, Rocket, LifeBuoy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Process = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
       icon: MessageSquare,
-      title: "Consultation",
-      description: "We listen to your needs and analyze your current workflows to identify opportunities for improvement."
+      titleKey: "process.steps.consultation.title",
+      descKey: "process.steps.consultation.desc",
     },
     {
       icon: Wrench,
-      title: "Development",
-      description: "Our team builds custom solutions tailored to your specific requirements using the latest technologies."
+      titleKey: "process.steps.development.title",
+      descKey: "process.steps.development.desc",
     },
     {
       icon: Rocket,
-      title: "Launch",
-      description: "We deploy your solution with minimal disruption, ensuring a smooth transition and proper training."
+      titleKey: "process.steps.launch.title",
+      descKey: "process.steps.launch.desc",
     },
     {
       icon: LifeBuoy,
-      title: "Support",
-      description: "Continuous monitoring, optimization, and updates to ensure your systems perform at their best."
-    }
+      titleKey: "process.steps.support.title",
+      descKey: "process.steps.support.desc",
+    },
   ];
 
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl font-bold mb-4">How We Work</h2>
+          <h2 className="text-4xl font-bold mb-4">{t("process.title")}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A proven process that delivers results every time
+            {t("process.subtitle")}
           </p>
         </div>
 
         <div className="relative">
           {/* Connection line */}
           <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 hidden lg:block"></div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {steps.map((step, index) => (
-              <div 
+              <div
                 key={index}
                 className="text-center animate-slide-up"
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -51,11 +54,17 @@ export const Process = () => {
                   </div>
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-primary/10 animate-pulse"></div>
                 </div>
-                
+
                 <div className="bg-card p-6 rounded-xl border border-border hover:shadow-soft transition-all duration-300">
-                  <div className="text-sm font-bold text-primary mb-2">Step {index + 1}</div>
-                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
+                  <div className="text-sm font-bold text-primary mb-2">
+                    {t("process.stepLabel", { number: index + 1 })}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">
+                    {t(step.titleKey)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {t(step.descKey)}
+                  </p>
                 </div>
               </div>
             ))}

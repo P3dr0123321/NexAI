@@ -1,43 +1,46 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Portfolio = () => {
+  const { t } = useTranslation();
+
   const projects = [
     {
-      title: "E-commerce Automation",
-      category: "Automation",
-      description: "Automated order processing and inventory management for a growing retail business"
+      categoryKey: "portfolio.projects.ecommerce.category",
+      titleKey: "portfolio.projects.ecommerce.title",
+      descKey: "portfolio.projects.ecommerce.desc",
     },
     {
-      title: "Corporate Website",
-      category: "Web Development",
-      description: "Modern, responsive website with integrated CMS and analytics"
+      categoryKey: "portfolio.projects.website.category",
+      titleKey: "portfolio.projects.website.title",
+      descKey: "portfolio.projects.website.desc",
     },
     {
-      title: "CRM Integration",
-      category: "Automation",
-      description: "Seamless integration between sales, marketing, and customer service platforms"
+      categoryKey: "portfolio.projects.crm.category",
+      titleKey: "portfolio.projects.crm.title",
+      descKey: "portfolio.projects.crm.desc",
     },
     {
-      title: "SaaS Landing Page",
-      category: "Web Development",
-      description: "High-converting landing page with A/B testing and lead capture"
-    }
+      categoryKey: "portfolio.projects.saas.category",
+      titleKey: "portfolio.projects.saas.title",
+      descKey: "portfolio.projects.saas.desc",
+    },
   ];
 
   return (
     <section className="py-20 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl font-bold mb-4">Our Work</h2>
+          <h2 className="text-4xl font-bold mb-4">{t("portfolio.title")}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Real results for real businesses
+            {t("portfolio.subtitle")}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card 
+            <Card
               key={index}
               className="group cursor-pointer border-border hover:shadow-glow transition-all duration-300 hover:-translate-y-1 animate-slide-up overflow-hidden"
               style={{ animationDelay: `${index * 100}ms` }}
@@ -49,9 +52,13 @@ export const Portfolio = () => {
                 </div>
               </div>
               <CardContent className="p-6">
-                <div className="text-sm font-medium text-accent mb-2">{project.category}</div>
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground">{project.description}</p>
+                <div className="text-sm font-medium text-accent mb-2">
+                  {t(project.categoryKey)}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t(project.titleKey)}
+                </h3>
+                <p className="text-muted-foreground">{t(project.descKey)}</p>
               </CardContent>
             </Card>
           ))}
